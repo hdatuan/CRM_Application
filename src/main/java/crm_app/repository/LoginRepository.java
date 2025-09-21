@@ -5,32 +5,38 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import config.MySQLConfig;
+import entity.User;
 
 public class LoginRepository {
 
-	public boolean findUser(String email, String password) {
-		
-		String query = "SELECT 1 FROM users WHERE email = ? AND password = ?";
-	
-		try (
-				Connection connection = MySQLConfig.getConnection();
-				PreparedStatement statement = connection.prepareStatement(query);
-				
-				){
-			
-			statement.setString(1, email);
-			statement.setString(2, password);
-			
-			try ( ResultSet resultSet = statement.executeQuery()) {
-				return resultSet.next();
-			}
-			
-	
-		} catch ( Exception e ) {
-			System.out.println("Error while finding user" + e.getMessage());
-		}
-		return false;
-		
-	}
-	
+    public User findUser(String email, String password) {
+        String query = "SELECT u.id, u.name, u.email, u.roleid, r.description AS role "
+                     + "FROM users u "
+                     + "JOIN roles r ON u.role_id = r.id "
+                     + "WHERE u.email = ? AND u.password = ?";
+
+        try (
+            Connection connection = MySQLConfig.getConnection();
+            PreparedStatement statement = connection.prepareStatement(query);
+        ) {
+            statement.setString(1, email);
+            statement.setString(2, password);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    User user = new User();
+                    user.setId(resultSet.getInt("id"));
+                    user.setFullname(resultSet.getString("name"));
+                    user.setEmail(resultSet.getString("email"));
+                    user.setRoleID(resultSet.getInt("role_id"));
+                    user.setRoleDescription(resultSet.getString("description"));
+                    return user;
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error while finding user: " + e.getMessage());
+        }
+        return null;
+    }
 }

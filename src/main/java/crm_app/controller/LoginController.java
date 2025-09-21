@@ -72,7 +72,9 @@ public class LoginController extends HttpServlet {
 		
 		String loginResult = "Sai email hoặc mật khẩu";
 		
-		if ( loginService.findUser(email, password) ) {
+		User user = loginService.findUser(email, password);
+		
+		if ( user != null ) {
 			loginResult = "Đăng nhập thành công";
 			Cookie cRole = new Cookie("role", "logged_in");
 			
@@ -83,11 +85,8 @@ public class LoginController extends HttpServlet {
 			resp.addCookie(cRole);
 			
 			
-			
-			
 			HttpSession session = req.getSession();
-			session.setAttribute("currentUser", email); 
-			
+			session.setAttribute("currentUser", user); 
 			req.setAttribute("loginResult", loginResult);
 			resp.sendRedirect( req.getContextPath() + "/home");
 			return;

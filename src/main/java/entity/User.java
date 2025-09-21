@@ -5,9 +5,20 @@ public class User {
 	private String email;
 	private String password;
 	private String fullname;
-	private String avatar;
 	private int roleID;
 	private String roleDescription;
+	
+	public User() {}
+	
+	public User(int id, String email, String password, String fullname, int roleID, String roleDescription) {
+		this.id = id;
+		this.email = email;
+		this.password = password;
+		this.fullname = fullname;
+		this.roleID = roleID;
+		this.roleDescription = roleDescription;
+	}
+	
 	
 	public String getRoleDescription() {
 		return roleDescription;
@@ -39,12 +50,7 @@ public class User {
 	public void setFullname(String fullname) {
 		this.fullname = fullname;
 	}
-	public String getAvatar() {
-		return avatar;
-	}
-	public void setAvatar(String avatar) {
-		this.avatar = avatar;
-	}
+	
 	public int getRoleID() {
 		return roleID;
 	}
