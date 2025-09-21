@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,7 +47,7 @@
                     <i class="fa fa-bars"></i>
                 </a>
                 <div class="top-left-part">
-                    <a class="logo" href="index.html">
+                    <a class="logo" href="home">
                         <b>
                             <img src="plugins/images/pixeladmin-logo.png" alt="home" />
                         </b>
@@ -68,8 +70,7 @@
                     <li>
                         <div class="dropdown">
                             <a class="profile-pic dropdown-toggle" data-toggle="dropdown" href="#"> 
-                                <img src="plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle" />
-                                <b class="hidden-xs">Cybersoft</b> 
+                                <b class="hidden-xs">Hoang Duc Anh Tuan</b> 
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="profile.html">Thông tin cá nhân</a></li>
@@ -90,7 +91,7 @@
             <div class="sidebar-nav navbar-collapse slimscrollsidebar">
                 <ul class="nav" id="side-menu">
                     <li style="padding: 10px 0 0;">
-                        <a href="index.html" class="waves-effect"><i class="fa fa-clock-o fa-fw"
+                        <a href="home" class="waves-effect"><i class="fa fa-clock-o fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Dashboard</span></a>
                     </li>
                     <li>
@@ -110,7 +111,7 @@
                                 aria-hidden="true"></i><span class="hide-menu">Công việc</span></a>
                     </li>
                     <li>
-                        <a href="blank.html" class="waves-effect"><i class="fa fa-columns fa-fw"
+                        <a href="blank" class="waves-effect"><i class="fa fa-columns fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Blank Page</span></a>
                     </li>
                     <li>
@@ -220,7 +221,7 @@
             </div>
         </div>
         <!-- /.container-fluid -->
-        <footer class="footer text-center"> 2018 &copy; myclass.com </footer>
+        <footer class="footer text-center"> 2025 &copy; myclass.com </footer>
     </div>
     <!-- /#page-wrapper -->
     </div>

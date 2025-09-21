@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -47,7 +50,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="navbar-header"> <a class="navbar-toggle hidden-sm hidden-md hidden-lg "
                     href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse"><i
                         class="fa fa-bars"></i></a>
-                <div class="top-left-part"><a class="logo" href="index.html"><b><img
+                <div class="top-left-part"><a class="logo" href="home"><b><img
                                 src="plugins/images/pixeladmin-logo.png" alt="home" /></b><span
                             class="hidden-xs"><img src="plugins/images/pixeladmin-text.png" alt="home" /></span></a>
                 </div>
@@ -75,7 +78,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="sidebar-nav navbar-collapse slimscrollsidebar">
                 <ul class="nav" id="side-menu">
                     <li style="padding: 10px 0 0;">
-                        <a href="index.html" class="waves-effect"><i class="fa fa-clock-o fa-fw"
+                        <a href="home" class="waves-effect"><i class="fa fa-clock-o fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Dashboard</span></a>
                     </li>
                     <li>
@@ -95,7 +98,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 aria-hidden="true"></i><span class="hide-menu">Công việc</span></a>
                     </li>
                     <li>
-                        <a href="blank.html" class="waves-effect"><i class="fa fa-columns fa-fw"
+                        <a href="blank" class="waves-effect"><i class="fa fa-columns fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Blank Page</span></a>
                     </li>
                     <li>

@@ -1,39 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%> 
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Login </title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-</head>
-<body>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Interface</title>
+    <link rel="stylesheet" href="css/login.css" />
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="login-form">
+        <h1>Đăng nhập</h1>
 
-<div class="container">
-  <div class="row mt-5">
-    <div class="col-md-5 m-auto mt-5">
-      <h3 class="text-center">ĐĂNG NHẬP HỆ THỐNG</h3>
-      <div class="p-4 border mt-4">
-        <form action="login" method="post">
-            <div class="form-group">
-              <label>Email</label>
-              <input type="email" class="form-control" name="email" value="${email}">
-            </div>
-            <div class="form-group">
-              <label>Mật khẩu</label>
-              <input type="password" class="form-control" name="password" value="${password}">
-            </div>
-            <input type="checkbox" name="remember" /> Nhớ mật khẩu <br>
-            <button type="submit" class="btn btn-primary">Đăng nhập</button>
-          </form>
-      </div>
-      </div>
-  </div>
-</div>
+        <form action="login" method= "post" >
+          <div class="form-group">
+            <input type="email" name="email" placeholder="Email" required />
+          </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-</body>
+          <div class="form-group">
+            <input type="password" name="password" placeholder="........" required />
+          </div>
+		
+		  <input type="checkbox" name="remember" /> Nhớ mật khẩu <br /> <br>
+          <button type="submit" class="signin-btn">Đăng nhập</button>
+        </form>
+      </div>
+
+      <div class="welcome-section">
+        <h2>CRM quản lý doanh nghiệp</h2>
+        <p>Quản lý nhân viên, công việc và dự án một cách hiệu quả</p>
+      </div>
+    </div>
+
+  </body>
 </html>

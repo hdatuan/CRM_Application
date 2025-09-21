@@ -56,6 +56,7 @@ public class LoginController extends HttpServlet {
 		String remember = req.getParameter("remember");
 		System.out.println(remember);
 		
+		// Nếu có "nhớ mật khẩu" thì lưu thông tin đăng nhập lại
 		if ( remember != null ) {
 			// Tạo cookie lưu thông tin người dùng đăng nhập
 			Cookie cEmail = new Cookie("email", email);
@@ -74,14 +75,19 @@ public class LoginController extends HttpServlet {
 		if ( loginService.findUser(email, password) ) {
 			loginResult = "Đăng nhập thành công";
 			Cookie cRole = new Cookie("role", "logged_in");
-			cRole.setMaxAge(8 * 60 * 60);
+			
+			
+			// Nếu có "nhớ mật khẩu" thì cookie sống lâu hơn
+			if ( remember != null ) cRole.setMaxAge(60 * 60 * 24 * 7);
+			else cRole.setMaxAge(60);
+			
 			resp.addCookie(cRole);
 			
 			HttpSession session = req.getSession();
 			session.setAttribute("currentUser", email); 
 			
 			req.setAttribute("loginResult", loginResult);
-			resp.sendRedirect( req.getContextPath() + "/index.html");
+			resp.sendRedirect( req.getContextPath() + "/home");
 			return;
 		} else {
 			req.setAttribute("loginResult", loginResult);

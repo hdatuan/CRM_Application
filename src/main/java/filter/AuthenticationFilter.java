@@ -13,28 +13,36 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter( filterName="authenFilter", urlPatterns = {"/user"})
+@WebFilter( filterName="authenFilter", urlPatterns = {"/*"})
 public class AuthenticationFilter implements Filter {
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-	/*
-	 * Check xem nguoi dung da log in chua, neu chua -> /login , neu roi -> /user
-	 */
-		
+
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
-		boolean isLoggedIn = false;
+
+        String path = req.getRequestURI().substring(req.getContextPath().length());
+
+        // ✅ Cho phép đi qua nếu là trang login 
+        if (path.startsWith("/login")) {
+            chain.doFilter(request, response);	// Cho phép request đi tiếp
+            return;
+        }
 		
-		
+        boolean isLoggedIn = false;
+        
 		Cookie[] cookies = req.getCookies();
-		for(Cookie c : cookies ) {
-			String name = c.getName();
-			if ( name.equals("role") ) {
-				isLoggedIn = true;
+		if ( cookies != null ) {
+			for(Cookie c : cookies ) {
+				if ( "role".equals(c.getName()) ) {
+					isLoggedIn = true;
+					break;
+				}
 			}
 		}
+		
 			
 		if ( isLoggedIn )  {
 			chain.doFilter(request, response);
