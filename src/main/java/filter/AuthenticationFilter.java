@@ -26,10 +26,14 @@ public class AuthenticationFilter implements Filter {
         String path = req.getRequestURI().substring(req.getContextPath().length());
 
         // ✅ Cho phép đi qua nếu là trang login 
-        if (path.startsWith("/login")) {
-            chain.doFilter(request, response);	// Cho phép request đi tiếp
-            return;
-        }
+        if (path.startsWith("/login") 
+        	    || path.startsWith("/css") 
+        	    || path.startsWith("/js") 
+        	    || path.startsWith("/images")) {
+        	    chain.doFilter(request, response);
+        	    return;
+        	}
+
 		
         boolean isLoggedIn = false;
         
@@ -47,7 +51,7 @@ public class AuthenticationFilter implements Filter {
 		if ( isLoggedIn )  {
 			chain.doFilter(request, response);
 		} else {
-			resp.sendRedirect( req.getContextPath() + "/login");
+			req.getRequestDispatcher("login.jsp").forward(req, resp);
 		}
 		
 		

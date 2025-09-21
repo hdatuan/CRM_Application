@@ -77,11 +77,13 @@ public class LoginController extends HttpServlet {
 			Cookie cRole = new Cookie("role", "logged_in");
 			
 			
-			// Nếu có "nhớ mật khẩu" thì cookie sống lâu hơn
+			// Nếu có "nhớ mật khẩu" thì cookie "sống" lâu hơn
 			if ( remember != null ) cRole.setMaxAge(60 * 60 * 24 * 7);
 			else cRole.setMaxAge(60);
-			
 			resp.addCookie(cRole);
+			
+			
+			
 			
 			HttpSession session = req.getSession();
 			session.setAttribute("currentUser", email); 
