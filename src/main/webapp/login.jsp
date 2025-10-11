@@ -22,9 +22,14 @@ pageEncoding="UTF-8"%>
             <input type="password" name="password" placeholder="........" required />
           </div>
 		
-		  <input type="checkbox" name="remember" /> Nhớ mật khẩu <br /> <br>
+		  <input type="checkbox" name="remember" /> Nhớ mật khẩu <br />
+		  	<c:if test="${not empty loginResult}">
+    				<div style="color:red">${loginResult}</div>
+			</c:if>
+		  
           <button type="submit" class="signin-btn">Đăng nhập</button>
         </form>
+        
       </div>
 
       <div class="welcome-section">

@@ -10,7 +10,7 @@ import entity.User;
 public class LoginRepository {
 
     public User findUser(String email, String password) {
-        String query = "SELECT u.id, u.name, u.email, u.roleid, r.description AS role "
+        String query = "SELECT u.id, u.fullname, u.email, u.role_id, r.description AS role "
                      + "FROM users u "
                      + "JOIN roles r ON u.role_id = r.id "
                      + "WHERE u.email = ? AND u.password = ?";
@@ -26,10 +26,10 @@ public class LoginRepository {
                 if (resultSet.next()) {
                     User user = new User();
                     user.setId(resultSet.getInt("id"));
-                    user.setFullname(resultSet.getString("name"));
+                    user.setFullname(resultSet.getString("fullname"));
                     user.setEmail(resultSet.getString("email"));
                     user.setRoleID(resultSet.getInt("role_id"));
-                    user.setRoleDescription(resultSet.getString("description"));
+                    user.setRoleDescription(resultSet.getString("role"));
                     return user;
                 }
             }
