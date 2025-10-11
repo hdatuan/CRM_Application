@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -63,16 +66,14 @@
                 <ul class="nav navbar-top-links navbar-right pull-right">
                     <li>
                         <div class="dropdown">
-                            <a class="profile-pic dropdown-toggle" data-toggle="dropdown" href="#">
-                                <img src="plugins/images/users/varun.jpg" alt="user-img" width="36"
-                                    class="img-circle" />
-                                <b class="hidden-xs">Cybersoft</b>
+                            <a class="profile-pic dropdown-toggle" data-toggle="dropdown" href="#"> 
+                                <b class="hidden-xs">${sessionScope.user.fullname}</b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="profile.html">Thông tin cá nhân</a></li>
-                                <li><a href="#">Thống kê công việc</a></li>
+                                <li><a href="profile">Thông tin cá nhân</a></li>
+                                <li><a href="profile-edit.html">Thống kê công việc</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">Đăng xuất</a></li>
+                                <li><a href="${pageContext.request.contextPath}/logout">Đăng xuất</a></li>
                             </ul>
                         </div>
                     </li>

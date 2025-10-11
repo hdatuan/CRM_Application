@@ -24,37 +24,23 @@ public class AuthenticationFilter implements Filter {
 		HttpServletResponse resp = (HttpServletResponse) response;
 
         String path = req.getRequestURI().substring(req.getContextPath().length());
-
-        // ✅ Cho phép đi qua nếu là trang login 
-        if (path.startsWith("/login") 
-        	    || path.startsWith("/css") 
-        	    || path.startsWith("/js") 
-        	    || path.startsWith("/images")) {
-        	    chain.doFilter(request, response);
-        	    return;
-        	}
-
-		
-        boolean isLoggedIn = false;
+        HttpSession session = req.getSession(false);
         
-		Cookie[] cookies = req.getCookies();
-		if ( cookies != null ) {
-			for(Cookie c : cookies ) {
-				if ( "role".equals(c.getName()) ) {
-					isLoggedIn = true;
-					break;
-				}
-			}
-		}
+        // Cac trang duoc phep di qua, khong can dang nhap : /login, /css, /js, /images
+        boolean isLoginRequest = path.startsWith("/login");
+        boolean isStaticResource = path.startsWith("/css") || path.startsWith("/js") || path.startsWith("/images");
+        
+        
+        // Kiem tra da dang nhap chua : session != null va da co user
+        boolean isLoggedIn = ( session != null && session.getAttribute("user") != null);
+
+     
 		
-			
-		if ( isLoggedIn )  {
+		if ( isLoggedIn || isLoginRequest || isStaticResource )  {
 			chain.doFilter(request, response);
 		} else {
-			req.getRequestDispatcher("login.jsp").forward(req, resp);
+			resp.sendRedirect(req.getContextPath() + "/login");
 		}
-		
-		
 	}
 	
 }

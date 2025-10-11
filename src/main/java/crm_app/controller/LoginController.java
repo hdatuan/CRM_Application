@@ -27,24 +27,26 @@ public class LoginController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		Cookie[] cookieList = req.getCookies();
+		// Nếu đã đăng nhập thì không thể vào trang /login nữa
+		HttpSession session = req.getSession(false);
+		if ( session != null && session.getAttribute("user") != null ) {
+			resp.sendRedirect(req.getContextPath() + "/home");
+			return;
+		}
 		
 		String email = "";
-		String password = "";
+		Cookie[] cookieList = req.getCookies();
 		
-		for (Cookie cookie : cookieList) {
-			String name = cookie.getName();
-			String value = cookie.getValue();
-			
-			if ( name.equals("email") ) email = value;
-			else if ( name.equals("password")) password = value;
-			
-			
+		if ( cookieList != null ) {
+			for (Cookie cookie : cookieList) {
+				if ( "email".equals(cookie.getName())) {
+					email = cookie.getValue();
+					break;
+				}
+			}
 		}
 		
 		req.setAttribute("email", email);
-		req.setAttribute("password", password);
-		
 		req.getRequestDispatcher("login.jsp").forward(req, resp);
 	}
 	
@@ -56,42 +58,28 @@ public class LoginController extends HttpServlet {
 		String remember = req.getParameter("remember");
 		System.out.println(remember);
 		
-		// Nếu có "nhớ mật khẩu" thì lưu thông tin đăng nhập lại
-		if ( remember != null ) {
-			// Tạo cookie lưu thông tin người dùng đăng nhập
-			Cookie cEmail = new Cookie("email", email);
-			Cookie cPassword = new Cookie("password", password);
-			cEmail.setMaxAge(300);
-			cPassword.setMaxAge(300);
-			resp.addCookie(cEmail);
-			resp.addCookie(cPassword);
-		}
-		
-		
 		LoginService loginService = new LoginService();
-		
-		String loginResult = "Sai email hoặc mật khẩu";
-		
 		User user = loginService.findUser(email, password);
 		
 		if ( user != null ) {
-			loginResult = "Đăng nhập thành công";
-			Cookie cRole = new Cookie("role", "logged_in");
-			
-			
-			// Nếu có "nhớ mật khẩu" thì cookie "sống" lâu hơn
-			if ( remember != null ) cRole.setMaxAge(60 * 60 * 24 * 7);
-			else cRole.setMaxAge(60);
-			resp.addCookie(cRole);
-			
-			
 			HttpSession session = req.getSession();
-			session.setAttribute("currentUser", user); 
-			req.setAttribute("loginResult", loginResult);
+			session.setAttribute("user", user);
+			
+			if ( remember != null ) {
+				Cookie cEmail = new Cookie("email", email);
+				cEmail.setMaxAge(60 * 60 * 24 * 7); 	// Lưu cookie 7 ngày nếu tick "Nhớ mật khẩu"
+				resp.addCookie(cEmail);
+			} else {
+				// Nếu không tick "Nhớ mật khẩu", xóa cookie cũ nếu có
+				// Tạo mới cookie hoặc ghi đè cookie cũ, thời gian tồn tại là 0
+				Cookie cEmail = new Cookie("email", "");	
+				cEmail.setMaxAge(0);
+				resp.addCookie(cEmail);
+			}
+			
 			resp.sendRedirect( req.getContextPath() + "/home");
-			return;
 		} else {
-			req.setAttribute("loginResult", loginResult);
+			req.setAttribute("loginResult", "Sai email hoặc mật khẩu");
 			req.getRequestDispatcher("login.jsp").forward(req, resp);
 		}
 	}
