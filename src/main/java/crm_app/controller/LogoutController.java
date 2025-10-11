@@ -26,9 +26,7 @@ public class LogoutController extends HttpServlet {
 		Cookie[] cookies = req.getCookies();
 		if ( cookies != null ) {
 			for( Cookie cookie : cookies ) {
-				if ( cookie.getName().equals("email")
-					|| cookie.getName().equals("password")
-					|| cookie.getName().equals("role")) {
+				if ( cookie.getName().equals("email") ) {
 					cookie.setMaxAge(0);
 					resp.addCookie(cookie);
 				}
