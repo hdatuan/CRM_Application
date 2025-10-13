@@ -28,15 +28,10 @@ public class TaskRepository {
 				+ "ON t.job_id = j.id\r\n"
 				+ "JOIN status s\r\n"
 				+ "ON t.status_id = s.id";
-		
-		Connection connection =  MySQLConfig.getConnection();
-		if ( connection == null ) {
-			throw new RuntimeException("Database Disconnected");
-		}
-		
-		try {
+		try (
+			Connection connection =  MySQLConfig.getConnection();
 			PreparedStatement statement = connection.prepareStatement(query);
-			
+		) {
 			ResultSet resultSet = statement.executeQuery();
 			
 			while( resultSet.next() ) {
@@ -56,4 +51,41 @@ public class TaskRepository {
 		
 		return taskList;
 	}
+	
+	public List<Task> findByUserId(int userId){
+		List<Task> userTasks = new ArrayList<Task>();
+		String query = "SELECT t.id, t.name, j.name AS job_name, t.start_date, t.end_date, s.name AS status_name\r\n"
+				+ "FROM tasks t\r\n"
+				+ "JOIN status s ON t.status_id = s.id\r\n"
+				+ "JOIN jobs j ON t.job_id = j.id\r\n"
+				+ "WHERE t.user_id = ?\r\n";
+		
+
+
+		try (	
+			Connection connection = MySQLConfig.getConnection();
+			PreparedStatement statement = connection.prepareStatement(query);
+		)	{
+			statement.setInt(1, userId);
+
+			ResultSet resultSet = statement.executeQuery();
+			
+			
+			while( resultSet.next() ) {
+				Task task = new Task();
+				task.setId(resultSet.getInt("id"));
+				task.setName(resultSet.getString("name"));
+				task.setJob_name(resultSet.getString("job_name"));
+				task.setStart_date(resultSet.getDate("start_date"));
+				task.setEnd_date(resultSet.getDate("end_date"));
+				task.setStatus_name(resultSet.getString("status_name"));
+				userTasks.add(task);
+			}
+			
+		} catch ( Exception e ) {
+			System.out.println("Error " + e.getMessage());
+		}
+		
+		return userTasks;
+		}
 }

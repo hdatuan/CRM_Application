@@ -76,7 +76,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="profile">Thông tin cá nhân</a></li>
-                                <li><a href="profile-edit.html">Thống kê công việc</a></li>
+                                <li><a href="profile-edit">Thống kê công việc</a></li>
                                 <li class="divider"></li>
                                 <li><a href="${pageContext.request.contextPath}/logout">Đăng xuất</a></li>
                             </ul>
@@ -149,7 +149,7 @@
                             </div>
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="progress">
-                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="${notStatedPercent}"
+                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="${notStartedPercent}"
                                         aria-valuemin="0" aria-valuemax="100" style="width: ${notStartedPercent}%"> <span
                                             class="sr-only">${notStartedPercent}% Complete (success)</span> </div>
                                 </div>

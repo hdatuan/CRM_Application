@@ -15,7 +15,10 @@ pageEncoding="UTF-8"%>
 
         <form action="login" method= "post" >
           <div class="form-group">
-            <input type="email" name="email" placeholder="Email" required />
+            <input type="email" name="email" 
+            			placeholder="Email" 
+            			value="${not empty email ? email : '' }"
+            			required />
           </div>
 
           <div class="form-group">
