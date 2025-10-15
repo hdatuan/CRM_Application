@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name="rootController", urlPatterns= {"/"})
+@WebServlet(name="rootController", urlPatterns= {"/root"})
 public class RootController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -21,3 +21,5 @@ public class RootController extends HttpServlet {
 		}
 	}
 }
+
+

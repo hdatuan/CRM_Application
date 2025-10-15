@@ -25,22 +25,22 @@ public class AuthenticationFilter implements Filter {
 
         String path = req.getRequestURI().substring(req.getContextPath().length());
         HttpSession session = req.getSession(false);
-        
-        // Cac trang duoc phep di qua, khong can dang nhap : /login, /css, /js, /images
+
         boolean isLoginRequest = path.startsWith("/login");
-        boolean isStaticResource = path.startsWith("/css") || path.startsWith("/js") || path.startsWith("/images");
-        
-        
+        boolean isStaticResource = path.startsWith("/css") || path.startsWith("/js") || path.startsWith("/images") 
+                                || path.startsWith("/bootstrap") || path.startsWith("/plugins") || path.startsWith("/less")
+                                || path.endsWith(".css") || path.endsWith(".js") || path.endsWith(".png") 
+                                || path.endsWith(".jpg") || path.endsWith(".jpeg") || path.endsWith(".gif")
+                                || path.endsWith(".ico") || path.endsWith(".woff") || path.endsWith(".woff2");
+
         // Kiem tra da dang nhap chua : session != null va da co user
         boolean isLoggedIn = ( session != null && session.getAttribute("user") != null);
 
-     
-		
 		if ( isLoggedIn || isLoginRequest || isStaticResource )  {
 			chain.doFilter(request, response);
 		} else {
 			resp.sendRedirect(req.getContextPath() + "/login");
 		}
 	}
-	
 }
+

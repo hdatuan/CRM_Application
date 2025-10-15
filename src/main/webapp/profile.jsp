@@ -132,10 +132,10 @@
                 <div class="row">
                     <div class="col-md-4 col-xs-12">
                         <div class="white-box">
-                            <div class="user-bg"> <img width="100%" alt="user" src="${pageContext.request.contextPath}/plugins/images/large/img1.jpg">
+                            <div class="user-bg"> <img width="100%" alt="user" src="${pageContext.request.contextPath}/plugins/images/large/1.jpg">
                                 <div class="overlay-box">
                                     <div class="user-content">
-                                        <a href="javascript:void(0)"><img src="${pageContext.request.contextPath}/plugins/images/users/genu.jpg"
+                                        <a href="javascript:void(0)"><img src="${pageContext.request.contextPath}/plugins/images/users/capyUIT.jpg"
                                                 class="thumb-lg img-circle" alt="img"></a>
                                         <h4 class="text-white">${user.fullname}</h4>
                                         <h5 class="text-white">${user.email}</h5>
