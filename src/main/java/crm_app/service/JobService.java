@@ -11,4 +11,8 @@ public class JobService {
 	public List<Job> getAllJobs() {
 		return jobRepository.findAll();
 	}
+	
+	public List<Job> getJobById(int user_id){
+		return jobRepository.findById(user_id);
+	}
 }

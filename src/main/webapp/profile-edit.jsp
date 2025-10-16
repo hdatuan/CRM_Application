@@ -125,7 +125,7 @@
             <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Thêm mới công việc</h4>
+                        <h4 class="page-title">Cập nhật công việc</h4>
                     </div>
                 </div>
                 <!-- /.row -->
@@ -134,45 +134,84 @@
                     <div class="col-md-2 col-12"></div>
                     <div class="col-md-8 col-xs-12">
                         <div class="white-box">
-                            <form class="form-horizontal form-material">
+                            <form action="profile-edit" class="form-horizontal form-material" method="get">
                                 <div class="form-group">
                                     <label class="col-md-12">Tên dự án</label>
                                     <div class="col-md-12">
-                                        <input type="text" readonly value="Dự án CRM" class="form-control form-control-line">
+                                        <select name="jobId" class="form-control form-control-line" onchange="this.form.submit()">
+                                        		<option value="">-- Chọn dự án --</option>
+                                        		<c:forEach var="item" items="${jobList}">
+                                     			<option value="${item.id}" ${param.jobId == item.id ? "selected" : "" }>
+                                     				${item.name}
+                                     			</option>
+                                        		</c:forEach>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Tên công việc</label>
                                     <div class="col-md-12">
-                                        <input type="text" readonly value="Thiết kế database" class="form-control form-control-line">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Ngày bắt đầu</label>
-                                    <div class="col-md-12">
-                                        <input type="text" readonly value="05-07/2020" class="form-control form-control-line"> 
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Ngày kết thúc</label>
-                                    <div class="col-md-12">
-                                        <input type="text" readonly value="17-07/2020" class="form-control form-control-line"> 
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Trạng thái</label>
-                                    <div class="col-md-12">
-                                        <select class="form-control form-control-line">
-                                            <option>Chưa thực hiện</option>
-                                            <option selected>Đang thực hiện</option>
-                                            <option>Đã hoàn thành</option>
+                                        <select name="taskId" class="form-control form-control-line" onchange="this.form.submit()">
+                                        		<option value="">-- Chọn công việc --</option>
+                                        		<c:forEach var="item" items="${taskList}">
+                                     			<option name="taskId" value="${item.id}" ${param.taskId == item.id ? "selected" : "" }>
+                                     				${item.name}
+                                     			</option>
+                                        		</c:forEach>
                                         </select>
                                     </div>
                                 </div>
+                              </form>
+
+
+
+                              <form action="profile-edit" class="form-horizontal form-material" method="post">
+                              	<input type="hidden" name="jobId" value="${param.jobId}">
+                              	<input type="hidden" name="taskId" value="${param.taskId}">
+                                	<div class="form-group">
+                                    <label class="col-md-12">Ngày bắt đầu</label>
+                                    <div class="col-md-12">
+                                        <input type="date" value="${task.start_date}" name="start_date" placeholder="YYYY-MM-DD" class="form-control form-control-line"> 
+                                    </div>
+                                	</div>
+                                	<div class="form-group">
+                                    <label class="col-md-12">Ngày kết thúc</label>
+                                    <div class="col-md-12">
+                                        <input type="date" value="${task.end_date}" name="end_date" placeholder="YYYY-MM-DD" class="form-control form-control-line"> 
+                                    </div>
+                                	</div>
+                                	<div class="form-group">
+                                    <label class="col-md-12">Trạng thái</label>
+                                    <div class="col-md-12">
+                                        <select name="status_id" class="form-control form-control-line">
+                                            <option value=1 ${task.status_id == 1 ? "selected" : "" } >Chưa thực hiện</option>
+                                            <option value=2 ${task.status_id == 2 ? "selected" : "" } >Đang thực hiện</option>
+                                            <option value=3 ${task.status_id == 3 ? "selected" : "" } >Đã hoàn thành</option>
+                                        </select>
+                                    </div>
+                                	</div>
+                                	<div class="form-group">
+                                <c:if test="${not empty param.message}">
+								    <span id="resultMessage"
+								          style="color:${param.message == 'success' ? 'green' : 'red'};">
+								        ${param.message == 'success' ? 'Cập nhật thành công' :
+								            param.message == 'fail' ? 'Cập nhật thất bại' :
+								            'Không có công việc để cập nhật'}
+								    </span>
+								
+								    <script>
+								        setTimeout(() => {
+								            var msg = document.getElementById("resultMessage");
+								            if (msg) msg.style.display = "none";
+								        }, 3000);
+								    </script>
+								</c:if>
+
+                                	</div>
                                 <div class="form-group">
                                     <div class="col-sm-12">
                                         <button type="submit" class="btn btn-success">Lưu lại</button>
-                                        <a href="profile.html" class="btn btn-primary">Quay lại</a>
+                                        <a href="profile" class="btn btn-primary">Quay lại</a>
                                     </div>
                                 </div>
                             </form>
