@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -76,30 +78,21 @@
             </li>
           </ul>
           <ul class="nav navbar-top-links navbar-right pull-right">
-            <li>
-              <div class="dropdown">
-                <a
-                  class="profile-pic dropdown-toggle"
-                  data-toggle="dropdown"
-                  href="#"
-                >
-                  <img
-                    src="plugins/images/users/varun.jpg"
-                    alt="user-img"
-                    width="36"
-                    class="img-circle"
-                  />
-                  <b class="hidden-xs">Cybersoft</b>
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a href="profile.html">Thông tin cá nhân</a></li>
-                  <li><a href="#">Thống kê công việc</a></li>
-                  <li class="divider"></li>
-                  <li><a href="#">Đăng xuất</a></li>
+                    <li>
+                        <div class="dropdown">
+                            <a class="profile-pic dropdown-toggle" data-toggle="dropdown" href="#"> 
+                                <img src="plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle" />
+                                <b class="hidden-xs">${sessionScope.user.fullname}</b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="profile">Thông tin cá nhân</a></li>
+                                
+                                <li class="divider"></li>
+                                <li><a href="${pageContext.request.contextPath}/logout">Đăng xuất</a></li>
+                            </ul>
+                        </div>
+                    </li>
                 </ul>
-              </div>
-            </li>
-          </ul>
         </div>
         <!-- /.navbar-header -->
         <!-- /.navbar-top-links -->
@@ -134,7 +127,7 @@
                                 aria-hidden="true"></i><span class="hide-menu">Blank Page</span></a>
                     </li>
                     <li>
-                        <a href="404.html" class="waves-effect"><i class="fa fa-info-circle fa-fw"
+                        <a href="404" class="waves-effect"><i class="fa fa-info-circle fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Error 404</span></a>
                     </li>
           </ul>
@@ -214,7 +207,7 @@
                       <button type="submit" class="btn btn-success">
                         Add User
                       </button>
-                      <a href="user-table.html" class="btn btn-primary"
+                      <a href="user" class="btn btn-primary"
                         >Quay lại</a
                       >
                     </div>

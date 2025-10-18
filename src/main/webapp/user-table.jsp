@@ -67,21 +67,21 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-top-links navbar-right pull-right">
-                        <li>
-                            <div class="dropdown">
-                                <a class="profile-pic dropdown-toggle" data-toggle="dropdown" href="#"> 
-                                    <img src="plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle" />
-                                    <b class="hidden-xs">Cybersoft</b> 
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="profile.html">Thông tin cá nhân</a></li>
-                                    <li><a href="#">Thống kê công việc</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#">Đăng xuất</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
+	                    <li>
+	                        <div class="dropdown">
+	                            <a class="profile-pic dropdown-toggle" data-toggle="dropdown" href="#"> 
+	                                <img src="plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle" />
+	                                <b class="hidden-xs">${sessionScope.user.fullname}</b>
+	                            </a>
+	                            <ul class="dropdown-menu">
+	                                <li><a href="profile">Thông tin cá nhân</a></li>
+	                                
+	                                <li class="divider"></li>
+	                                <li><a href="${pageContext.request.contextPath}/logout">Đăng xuất</a></li>
+	                            </ul>
+	                        </div>
+	                    </li>
+	                </ul>
                 </div>
                 <!-- /.navbar-header -->
                 <!-- /.navbar-top-links -->
@@ -116,7 +116,7 @@
                                 aria-hidden="true"></i><span class="hide-menu">Blank Page</span></a>
                     </li>
                     <li>
-                        <a href="404.html" class="waves-effect"><i class="fa fa-info-circle fa-fw"
+                        <a href="404" class="waves-effect"><i class="fa fa-info-circle fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Error 404</span></a>
                     </li>
                 </ul>
@@ -131,7 +131,7 @@
                         <h4 class="page-title">Danh sách thành viên</h4>
                     </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
-                        <a href="user-add.html" class="btn btn-sm btn-success">Thêm mới</a>
+                        <a href="user-add" class="btn btn-sm btn-success">Thêm mới</a>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>

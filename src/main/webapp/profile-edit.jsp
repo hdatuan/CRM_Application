@@ -72,7 +72,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="profile">Thông tin cá nhân</a></li>
-                                <li><a href="profile-edit">Thống kê công việc</a></li>
+                                
                                 <li class="divider"></li>
                                 <li><a href="${pageContext.request.contextPath}/logout">Đăng xuất</a></li>
                             </ul>
