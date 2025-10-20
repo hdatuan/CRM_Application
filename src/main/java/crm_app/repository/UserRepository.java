@@ -66,6 +66,63 @@ public class UserRepository {
 		}
 		return userList;
 	}	
+	public User findById(int id) {
+	    User user = null;
+	    String query = "SELECT u.*, r.description FROM users u JOIN roles r ON u.role_id = r.id WHERE u.id = ?";
+	    Connection connection = MySQLConfig.getConnection();
+
+	    try {
+	        PreparedStatement statement = connection.prepareStatement(query);
+	        statement.setInt(1, id);
+	        ResultSet rs = statement.executeQuery();
+
+	        if (rs.next()) {
+	            user = new User();
+	            user.setId(rs.getInt("id"));
+	            user.setFullname(rs.getString("fullname"));
+	            user.setEmail(rs.getString("email"));
+	            user.setRoleID(rs.getInt("role_id"));
+	            user.setRoleDescription(rs.getString("description"));
+	        }
+	    } catch (Exception e) {
+	        System.out.println("Error: " + e.getMessage());
+	    }
+
+	    return user;
+	}
+
+	
+	public int updateUser(int id, String fullName, String email, String password, int roleId) {
+	    int row = 0;
+
+	    String query = "UPDATE users "
+	                 + "SET fullname = ?, email = ?, password = ?, role_id = ? "
+	                 + "WHERE id = ?";
+
+	    Connection connection = MySQLConfig.getConnection();
+
+	    if (connection == null) {
+	        throw new RuntimeException("Database disconnected");
+	    }
+
+	    try {
+	        PreparedStatement statement = connection.prepareStatement(query);
+
+	        statement.setString(1, fullName);
+	        statement.setString(2, email);
+	        statement.setString(3, password);
+	        statement.setInt(4, roleId);
+	        statement.setInt(5, id);
+
+	        row = statement.executeUpdate();
+
+	    } catch (Exception e) {
+	        System.out.println("Error: " + e.getMessage());
+	    }
+
+	    return row;
+	}
+
 	
 	public int insertUser(String fullName, String email, String password, int roleId) {
 		int row = 0;

@@ -2,6 +2,7 @@ package crm_app.controller;
 
 import java.io.IOException;
 
+import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import crm_app.service.UserService;
 import entity.User;
-@WebServlet(name="userAddController", urlPatterns= {"/user-add"})
+@WebServlet(name="userAddController", urlPatterns= {"/user-add", "/user-edit"})
 public class UserAddController extends HttpServlet {
 	
 	UserService userService = new UserService();
@@ -25,6 +26,18 @@ public class UserAddController extends HttpServlet {
 			resp.sendRedirect("404.jsp");
 			return;
 		}
+		
+		String servletPath = req.getServletPath();
+	    if (servletPath.equals("/user-edit")) {
+	        String idStr = req.getParameter("id");
+	        if (idStr != null) {
+	            int id = Integer.parseInt(idStr);
+	            User editUser = userService.findById(id);
+	            req.setAttribute("editUser", editUser);
+	            req.getRequestDispatcher("user-edit.jsp").forward(req, resp);
+	            return;
+	        }
+	    }
 		
 		req.getRequestDispatcher("user-add.jsp").forward(req, resp);
 	}
@@ -47,16 +60,32 @@ public class UserAddController extends HttpServlet {
             return;
         }
 		
-		boolean isSuccess = userService.insertUser(fullName, email, password, roleId);
+		if ( req.getServletPath().equals("/user-add") ) {
+			
+			boolean isSuccess = userService.insertUser(fullName, email, password, roleId);
+			
+			if (isSuccess) {
+				req.setAttribute("message", "Thêm người dùng thành công!");
+			} else {
+				req.setAttribute("message", "Người dùng đã tồn tại, vui lòng thử lại!");
+			}
+			req.setAttribute("isDone", isDone);
+			req.setAttribute("isSuccess", isSuccess);
+			req.getRequestDispatcher("user-add.jsp").forward(req, resp);			
+		} else if ( req.getServletPath().equals("/user-edit") ) {
+			int id = Integer.parseInt(req.getParameter("id"));
+			boolean isSuccess = userService.updateUser(id, fullName, email, password, roleId);
+			
+			if (isSuccess) {
+				req.setAttribute("message", "Chỉnh sửa người dùng thành công!");
+			} else {
+				req.setAttribute("message", "Thất bại, vui lòng thử lại!");
+			}
+			req.setAttribute("isDone", isDone);
+			req.setAttribute("isSuccess", isSuccess);
+			req.getRequestDispatcher("user-edit.jsp").forward(req, resp);
+		}
 		
-		if (isSuccess) {
-            req.setAttribute("message", "Thêm người dùng thành công!");
-        } else {
-            req.setAttribute("message", "Người dùng đã tồn tại, vui lòng thử lại!");
-        }
-        req.setAttribute("isDone", isDone);
-        req.setAttribute("isSuccess", isSuccess);
-		req.getRequestDispatcher("user-add.jsp").forward(req, resp);
 	}
 	
 }

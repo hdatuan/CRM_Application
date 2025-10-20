@@ -149,16 +149,17 @@
             <div class="col-md-2 col-12"></div>
             <div class="col-md-8 col-xs-12">
               <div class="white-box">
-                <form method="post" class="form-horizontal form-material">
+                <form method="post" action="user-edit" class="form-horizontal form-material">
+                	 <input type="hidden" name="id" value="${editUser.id}" />
                   <div class="form-group">
                     <label class="col-md-12">Họ tên</label>
                     <div class="col-md-12">
                       <input
                       	name="fullname"
                         type="text"
-                        placeholder="Johnathan Doe"
                         class="form-control form-control-line"
-                      />
+                        value="${editUser.fullname}"
+                      /> 
                     </div>
                   </div>
                   <div class="form-group">
@@ -166,10 +167,10 @@
                     <div class="col-md-12">
                       <input
                         type="email"
-                        placeholder="johnathan@admin.com"
                         class="form-control form-control-line"
                         name="email"
                         id="example-email"
+                        value="${editUser.email}"
                       />
                     </div>
                   </div>
@@ -179,7 +180,6 @@
                       <input
                       	name="password"
                         type="password"
-                        value="password"
                         class="form-control form-control-line"
                       />
                     </div>
@@ -199,9 +199,9 @@
                     <label class="col-sm-12">Vai trò</label>
                     <div class="col-sm-12">
                       <select name="role-id" class="form-control form-control-line">
-                        <option value=1 >Quản trị hệ thống</option>
-                        <option value=2 >Quản lý</option>
-                        <option value=3>Nhân viên</option>
+                        <option value=1 ${editUser.roleID == 1 ? 'selected' : '' } >Quản trị hệ thống</option>
+                        <option value=2 ${editUser.roleID == 2 ? 'selected' : '' } >Quản lý</option>
+                        <option value=3 ${editUser.roleID == 3 ? 'selected' : '' } >Nhân viên</option>
                       </select>
                     </div>
                   </div>
@@ -221,7 +221,7 @@
                   <div class="form-group">
                     <div class="col-sm-12">
                       <button type="submit" class="btn btn-success">
-                        Thêm
+                        Lưu
                       </button>
                       <a href="user" class="btn btn-primary"
                         >Quay lại</a
