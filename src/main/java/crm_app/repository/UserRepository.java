@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import config.MySQLConfig;
+import entity.Role;
 import entity.User;
 
 public class UserRepository {
@@ -65,6 +66,40 @@ public class UserRepository {
 		}
 		return userList;
 	}	
+	
+	public int insertUser(String fullName, String email, String password, int roleId) {
+		int row = 0;
+		String query = "INSERT INTO users ( email, password, fullname, role_id) "
+				+ "VALUES ( ?, ?, ?, ?)";
+		Connection connection = MySQLConfig.getConnection();
+		
+		if ( connection == null ) {
+			throw new RuntimeException("Database disconnected");
+		}
+	 
+		try {
+			PreparedStatement statement = connection.prepareStatement(query);
+			
+			statement.setString(1, email);
+			statement.setString(2, password);
+			statement.setString(3, fullName);
+			statement.setInt(4, roleId);
+			
+			// Check if user is existed
+			List<User> insertedUser = this.findAll();
+			for(User user : insertedUser) {
+				if ( user.getFullname().equals(fullName) ) return 0;
+			}
+			
+			
+			row = statement.executeUpdate();
+			
+		} catch ( Exception e ) {
+			System.out.println("Error : " + e.getMessage());
+		}
+		return row;
+	}
+	
 	
 	public void deleteUser(int id) {
 		

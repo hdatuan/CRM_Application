@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import crm_app.service.UserService;
 import entity.User;
@@ -21,6 +22,13 @@ public class UserController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		if ( req.getServletPath().equals("/user-delete") ) {
+			HttpSession session = req.getSession(false);
+			User user = (User) session.getAttribute("user");
+			int roleId = user.getRoleID();
+			if ( roleId != 1 ) {
+				resp.sendRedirect("404.jsp");
+				return;
+			}
 			int user_id =  Integer.parseInt(req.getParameter("id"));
 			
 			userService.deleteUser(user_id);

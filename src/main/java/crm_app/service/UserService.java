@@ -13,6 +13,10 @@ public class UserService {
 		return userRepository.findAll();
 	}
 	
+	public boolean insertUser(String fullName, String email, String password, int roleId) {
+		return userRepository.insertUser(fullName, email, password, roleId) > 0;
+	}
+	
 	public void deleteUser(int id) {
 		userRepository.deleteUser(id);
 	}
