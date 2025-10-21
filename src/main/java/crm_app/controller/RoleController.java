@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import crm_app.service.RoleService;
 import entity.Role;
@@ -19,12 +20,25 @@ public class RoleController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		List<Role> roleList = roleService.getAllRoles();
+	    List<Role> roleList = roleService.getAllRoles();
+	    req.setAttribute("roles", roleList);
 
-		req.setAttribute("roles", roleList);
-		
-		req.getRequestDispatcher("role-table.jsp").forward(req, resp);
+	    HttpSession session = req.getSession(false);
+	    if (session != null) {
+	        Object msg = session.getAttribute("deleteMessage");
+	        Object success = session.getAttribute("isSuccess");
+
+	        if (msg != null) {
+	            req.setAttribute("deleteMessage", msg);
+	            req.setAttribute("isSuccess", success);
+
+	            session.removeAttribute("deleteMessage");
+	            session.removeAttribute("isSuccess");
+	        }
+	    }
+
+	    req.getRequestDispatcher("role-table.jsp").forward(req, resp);
 	}
-	
+
 
 }

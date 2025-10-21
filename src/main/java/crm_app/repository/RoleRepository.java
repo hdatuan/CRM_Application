@@ -10,31 +10,66 @@ import config.MySQLConfig;
 import entity.Role;
 
 public class RoleRepository {
+	
+	public int deleteRole(int roleId) {
+	    int row = 0;
+	    String checkQuery = "SELECT COUNT(*) AS count FROM users WHERE role_id = ?";
+	    String deleteQuery = "DELETE FROM roles WHERE id = ?";
+
+	    try (Connection connection = MySQLConfig.getConnection()) {
+	        // Kiểm tra xem role có đang được dùng không
+	        PreparedStatement checkStmt = connection.prepareStatement(checkQuery);
+	        checkStmt.setInt(1, roleId);
+	        ResultSet rs = checkStmt.executeQuery();
+	        if (rs.next() && rs.getInt("count") > 0) {
+	            System.out.println("Không thể xóa role: đang có user sử dụng!");
+	            return 0;
+	        }
+
+	        PreparedStatement deleteStmt = connection.prepareStatement(deleteQuery);
+	        deleteStmt.setInt(1, roleId);
+	        row = deleteStmt.executeUpdate();
+	    } catch (Exception e) {
+	        System.out.println("Error: " + e.getMessage());
+	    }
+
+	    return row;
+	}
+
+
+	
+	public int updateRole(int roleId, String roleName, String description) {
+		int row = 0;
+		String query = "UPDATE roles SET name = ?, description = ? WHERE id = ?";
+		
+		try ( 	Connection connection = MySQLConfig.getConnection();
+				PreparedStatement statement = connection.prepareStatement(query);
+		) {
+			statement.setString(1, roleName);
+			statement.setString(2, description);
+			statement.setInt(3, roleId);
+			row = statement.executeUpdate();
+			
+		} catch ( Exception e ) {
+			System.out.println(e.getMessage());
+		}
+		
+		return row;
+	}
 
 	public List<Role> findAll() {
 		List<Role> roleList = new ArrayList<>();
 		
-		
-		/*	1, Chuẩn bị câu truy vấn
-		 * 	2, Mở kết nối DB 
-		 * 	3, Truyền query vào DB
-		 * 	4, Thực hiện
-		 */
-		
-		// 1
 		String query = "SELECT * FROM roles";
 		
-		//2
 		Connection connection =  MySQLConfig.getConnection();
 		if ( connection == null ) {
 			throw new RuntimeException("Database Disconnected");
 		}
 		
 		try {
-			// 3
 			PreparedStatement statement = connection.prepareStatement(query);
 			
-			// 4 : execute query
 			ResultSet resultSet = statement.executeQuery();
 			
 			while ( resultSet.next() ) {
@@ -70,7 +105,7 @@ public class RoleRepository {
 			statement.setString(1, name);
 			statement.setString(2, description);
 			
-			// Check if role is existed
+			// Check if the role is existed
 			List<Role> insertedRole = this.findAll();
 			for(Role role : insertedRole) {
 				if ( role.getName().equals(name) ) return 0;
@@ -85,4 +120,26 @@ public class RoleRepository {
 		
 		return rowCount;
 	}
+	
+	public Role findById(int id) {
+	    Role role = null;
+	    String query = "SELECT * FROM roles WHERE id = ?";
+	    try (
+	        Connection connection = MySQLConfig.getConnection();
+	        PreparedStatement statement = connection.prepareStatement(query);
+	    ) {
+	        statement.setInt(1, id);
+	        ResultSet rs = statement.executeQuery();
+	        if (rs.next()) {
+	            role = new Role();
+	            role.setId(rs.getInt("id"));
+	            role.setName(rs.getString("name"));
+	            role.setDescription(rs.getString("description"));
+	        }
+	    } catch (Exception e) {
+	        System.out.println("Error: " + e.getMessage());
+	    }
+	    return role;
+	}
+
 }

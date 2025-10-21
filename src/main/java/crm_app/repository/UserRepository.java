@@ -29,27 +29,17 @@ public class UserRepository {
 	
 	public List<User> findAll() {
 		List<User> userList = new ArrayList<>();
-		
-		/*	1, Chuẩn bị câu truy vấn
-		 * 	2, Mở kết nối DB 
-		 * 	3, Truyền query vào DB
-		 * 	4, Thực hiện
-		 */
-		
-		// 1
+	
 		String query = "SELECT * FROM users u JOIN roles r ON u.role_id = r.id";
 		
-		// 2
 		Connection connection = MySQLConfig.getConnection();
 		if (connection == null) {
 		    throw new RuntimeException("Không thể kết nối tới Database");
 		}
 		
 		try {
-			// 3
 			PreparedStatement statement = connection.prepareStatement(query);
 			
-			// 4 
 			ResultSet resultSet = statement.executeQuery();
 			
 			while ( resultSet.next() ) {
@@ -66,6 +56,8 @@ public class UserRepository {
 		}
 		return userList;
 	}	
+	
+	
 	public User findById(int id) {
 	    User user = null;
 	    String query = "SELECT u.*, r.description FROM users u JOIN roles r ON u.role_id = r.id WHERE u.id = ?";

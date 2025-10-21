@@ -158,8 +158,11 @@
 	                                    			<td> ${item.email}</td>
 	                                    			<td> ${item.roleDescription}</td>
 	                                    			<td>
+	                                    				<c:if test="${user.id == 1}">
 	                                                <a href="user-edit?id=${item.id}" class="btn btn-sm btn-primary">Sửa</a>
-	                                                <a href="user-delete?id=${item.id}" class="btn btn-sm btn-danger">Xóa</a>
+	                                                <a href="user-delete?id=${item.id}" class="btn btn-sm btn-danger"
+	                                                		onclick="return confirm('Bạn có chắc muốn xóa người dùng này không?');">Xóa</a>
+	                                    				</c:if>
 	                                                <a href="user-details.html" class="btn btn-sm btn-info">Xem</a>
 	                                            </td>
 	                                          </tr>

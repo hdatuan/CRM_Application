@@ -199,9 +199,9 @@
                     <label class="col-sm-12">Vai trò</label>
                     <div class="col-sm-12">
                       <select name="role-id" class="form-control form-control-line">
-                        <option value=1 ${editUser.roleID == 1 ? 'selected' : '' } >Quản trị hệ thống</option>
-                        <option value=2 ${editUser.roleID == 2 ? 'selected' : '' } >Quản lý</option>
-                        <option value=3 ${editUser.roleID == 3 ? 'selected' : '' } >Nhân viên</option>
+                      	<c:forEach var = "item" items="${roles}">
+    		                    <option value="${item.id}" >${item.description}</option>
+					     </c:forEach>
                       </select>
                     </div>
                   </div>

@@ -16,14 +16,12 @@
     <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Menu CSS -->
     <link href="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     <!-- animation CSS -->
     <link href="css/animate.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="css/style.css" rel="stylesheet">
     <!-- color CSS -->
     <link href="css/colors/blue-dark.css" id="theme" rel="stylesheet">
-    <link rel="stylesheet" href="./css/custom.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -126,60 +124,57 @@
             <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Danh sách quyền</h4>
+                        <h4 class="page-title">Chỉnh sửa quyền</h4>
                     </div>
-                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
-                        <a href="role-add" class="btn btn-sm btn-success">Thêm mới</a>
-                    </div>
-                    <!-- /.col-lg-12 -->
                 </div>
-                <!-- /row -->
+                <!-- /.row -->
+                <!-- .row -->
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-md-2 col-12"></div>
+                    <div class="col-md-8 col-xs-12">
                         <div class="white-box">
-	                        <c:if test="${not empty deleteMessage}">
-							    <div style="margin-bottom: 15px; color:${isSuccess ? 'green' : 'red'};">
-							        ${deleteMessage}
+                            <form action="role-edit" method="post" class="form-horizontal form-material">
+							    <input type="hidden" name="roleId" value="${editRole.id}" />
+							    <div class="form-group">
+							        <label class="col-md-12">Tên quyền</label>
+							        <div class="col-md-12">
+							            <input type="text" name="roleName" placeholder="Tên quyền"
+							                   class="form-control form-control-line"
+							                   value="${editRole.name}" />
+							        </div>
 							    </div>
-							    <script>
-							        setTimeout(() => {
-							            document.querySelector('[style*="margin-bottom"]').style.display = "none";
-							        }, 3000);
-							    </script>
-							</c:if>
-							                        
-                            <div class="table-responsive">
-                                <table class="table" id="example">
-                                    <thead>
-                                        <tr>
-                                            <th>STT</th>
-                                            <th>Tên Quyền</th>
-                                            <th>Mô Tả</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    		<c:forEach items="${roles}" var="item" varStatus="loop">
-                                    			<tr>
-	                                    			<td name="id"> ${item.id}</td>
-	                                    			<td> ${item.name}</td>
-	                                    			<td> ${item.description}</td>
-	                                    			<td>
-	                                    				<c:if test="${user.id == 1 }">
-                                                			<a href="role-edit?id=${item.id}" class="btn btn-sm btn-primary">Sửa</a>
-										                <a href="role-delete?id=${item.id}" class="btn btn-sm btn-danger"
-										                   onclick="return confirm('Bạn có chắc muốn xóa quyền này không?');">
-										                   Xóa
-										                </a>
-	                                    				</c:if>
-                                            		</td>
-	                                          </tr>
-                                    		</c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
+							    <div class="form-group">
+							        <label class="col-md-12">Mô tả</label>
+							        <div class="col-md-12">
+							            <input type="text" name="roleDesc" placeholder="Mô tả"
+							                   class="form-control form-control-line"
+							                   value="${editRole.description}" />
+							        </div>
+							    </div>
+							
+							    <c:if test="${isDone}">
+							        <span id="roleMessage" style="color:${isSuccess ? 'green' : 'red'};">
+							            ${message}
+							        </span>
+							        <script>
+							            setTimeout(function() {
+							                var msg = document.getElementById("roleMessage");
+							                if (msg) msg.style.display = "none";
+							            }, 3000);
+							        </script>
+							    </c:if>
+							
+							    <div class="form-group">
+							        <div class="col-sm-12">
+							            <button type="submit" class="btn btn-success">Cập nhật</button>
+							            <a href="role" class="btn btn-primary">Quay lại</a>
+							        </div>
+							    </div>
+							</form>
+
                         </div>
                     </div>
+                    <div class="col-md-2 col-12"></div>
                 </div>
                 <!-- /.row -->
             </div>
@@ -197,16 +192,10 @@
     <script src="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
     <!--slimscroll JavaScript -->
     <script src="js/jquery.slimscroll.js"></script>
-    <script src="js/jquery.dataTables.js"></script>
     <!--Wave Effects -->
     <script src="js/waves.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="js/custom.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#example').DataTable();
-        });
-    </script>
 </body>
 
 </html>

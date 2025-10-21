@@ -199,9 +199,9 @@
                     <label class="col-sm-12">Vai trò</label>
                     <div class="col-sm-12">
                       <select name="role-id" class="form-control form-control-line">
-                        <option value=1 >Quản trị hệ thống</option>
-                        <option value=2 >Quản lý</option>
-                        <option value=3>Nhân viên</option>
+                      	<c:forEach var = "item" items="${roles}">
+    		                    <option value="${item.id}" >${item.description}</option>
+					     </c:forEach>
                       </select>
                     </div>
                   </div>
