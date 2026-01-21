@@ -10,7 +10,7 @@ public class MySQLConfig {
 	public static Connection getConnection() {
 		Connection connection = null;
 		Properties prop = new Properties();
-		try ( InputStream input = MySQLConfig.class.getClassLoader().getResourceAsStream("db.resources"))
+		try ( InputStream input = MySQLConfig.class.getClassLoader().getResourceAsStream("db.properties"))
 		{
 			if ( input == null ) {
 				System.out.println("Không tìm thấy file db.resources");
