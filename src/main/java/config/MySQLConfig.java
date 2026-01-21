@@ -1,16 +1,26 @@
 package config;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.Properties;
 
 public class MySQLConfig {
 
 	public static Connection getConnection() {
 		Connection connection = null;
-		try {
-			String url = "jdbc:mysql://localhost:3307/crm_app";
-			String username = "root";
-			String password = "tuan2006";
+		Properties prop = new Properties();
+		try ( InputStream input = MySQLConfig.class.getClassLoader().getResourceAsStream("db.resources"))
+		{
+			if ( input == null ) {
+				System.out.println("Không tìm thấy file db.resources");
+				return null;
+			}
+			
+			prop.load(input);
+			String url = prop.getProperty("db.url");
+			String username = prop.getProperty("db.user");
+			String password = prop.getProperty("db.pass");
 														
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			connection = DriverManager.getConnection(url, username, password);
@@ -19,5 +29,4 @@ public class MySQLConfig {
 		}
 		return connection;
 	}
-	
 }

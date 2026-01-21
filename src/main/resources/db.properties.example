@@ -1,0 +1,5 @@
+# Create "db.properties" and replace the following example value by your database information
+
+db.url=jdbc:mysql://localhost:3306/your_database_name
+db.user=root
+db.pass=your_database_password

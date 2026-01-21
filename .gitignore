@@ -1,0 +1,22 @@
+# Build and bin
+*.class
+bin/
+build/
+
+# Eclipse files
+.settings/
+.metadata/
+.project
+.classpath
+.idea/
+*.iml
+
+# System files
+.DS_Store
+Thumbs.db
+
+# log library
+*.log
+
+# db.properties ( store database url, user, password ) 
+src/main/resouces/db.properties
