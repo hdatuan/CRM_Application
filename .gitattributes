@@ -1,2 +1,2 @@
-src/main/webapp/less/** linguist-vendored
-src/main/webapp/less/** linguist-documentation
+src/main/webapp/bootstrap/less/** linguist-vendored
+src/main/webapp/bootstrap/less/** linguist-documentation
