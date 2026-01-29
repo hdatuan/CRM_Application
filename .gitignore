@@ -3,21 +3,46 @@
 bin/
 build/
 target/
+dist/
+classes/
+out/
 
-# IDE files
+# Packaging
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Eclipse IDE
 .settings/
 .metadata/
 .project
 .classpath
+.factorypath
+.apt_generated/
+.springBeans
+
+# IntelliJ IDE
 .idea/
 *.iml
+*.iws
+*.ipr
+
+# VS Code
+.vscode/
 
 # System files
 .DS_Store
 Thumbs.db
+ehthumbs.db
+Desktop.ini
 
-# log library
+# Logs
 *.log
+logs/
 
-# db.properties ( store database url, user, password ) 
+# Secrets and local config
 src/main/resources/db.properties
+.env
