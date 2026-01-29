@@ -47,7 +47,7 @@ public class LoginController extends HttpServlet {
 		}
 		
 		req.setAttribute("email", email);
-		req.getRequestDispatcher("login.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
 	}
 	
 	@Override
@@ -80,11 +80,13 @@ public class LoginController extends HttpServlet {
 			resp.sendRedirect( req.getContextPath() + "/home");
 		} else {
 			req.setAttribute("loginResult", "Sai email hoặc mật khẩu");
-			req.getRequestDispatcher("login.jsp").forward(req, resp);
+			req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
 		}
 	}
 	
 	
 	
 }
+
+
 

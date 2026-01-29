@@ -50,7 +50,7 @@ public class ProfileEditController extends HttpServlet {
 		}
 		
 		
-		req.getRequestDispatcher("profile-edit.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/profile-edit.jsp").forward(req, resp);
 	}
 	
 	
@@ -101,4 +101,6 @@ public class ProfileEditController extends HttpServlet {
 	
 	
 }
+
+
 

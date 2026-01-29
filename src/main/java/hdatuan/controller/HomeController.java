@@ -44,7 +44,9 @@ public class HomeController extends HttpServlet {
 	    req.setAttribute("inProgressPercent", inProgressPercent);
 	    req.setAttribute("donePercent", donePercent);
 		
-		req.getRequestDispatcher("index.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(req, resp);
 	}
 }
+
+
 

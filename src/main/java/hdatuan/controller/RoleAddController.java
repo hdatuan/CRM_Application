@@ -43,7 +43,7 @@ public class RoleAddController extends HttpServlet {
                 req.setAttribute("message", "Thiếu ID quyền cần chỉnh sửa!");
                 req.setAttribute("isDone", isDone);
                 req.setAttribute("isSuccess", false);
-                req.getRequestDispatcher("role-edit.jsp").forward(req, resp);
+                req.getRequestDispatcher("/WEB-INF/views/role-edit.jsp").forward(req, resp);
                 return;
             }
 
@@ -75,7 +75,7 @@ public class RoleAddController extends HttpServlet {
         String servletPath = req.getServletPath();
 
         if (servletPath.equals("/role-add")) {
-            req.getRequestDispatcher("role-add.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/views/role-add.jsp").forward(req, resp);
         } else if (servletPath.equals("/role-edit")) {
             String idStr = req.getParameter("id");
             if (idStr == null || idStr.isEmpty()) {
@@ -94,7 +94,7 @@ public class RoleAddController extends HttpServlet {
                 req.setAttribute("editRole", editRole);
             }
 
-            req.getRequestDispatcher("role-edit.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/views/role-edit.jsp").forward(req, resp);
         }
     }
 
@@ -102,10 +102,12 @@ public class RoleAddController extends HttpServlet {
     private void forwardByPath(HttpServletRequest req, HttpServletResponse resp, String path)
             throws ServletException, IOException {
         if (path.equals("/role-add")) {
-            req.getRequestDispatcher("role-add.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/views/role-add.jsp").forward(req, resp);
         } else {
-            req.getRequestDispatcher("role-edit.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/views/role-edit.jsp").forward(req, resp);
         }
     }
 }
+
+
 

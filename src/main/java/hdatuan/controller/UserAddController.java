@@ -40,12 +40,12 @@ public class UserAddController extends HttpServlet {
 	            int id = Integer.parseInt(idStr);
 	            User editUser = userService.findById(id);
 	            req.setAttribute("editUser", editUser);
-	            req.getRequestDispatcher("user-edit.jsp").forward(req, resp);
+	            req.getRequestDispatcher("/WEB-INF/views/user-edit.jsp").forward(req, resp);
 	            return;
 	        }
 	    }
 		
-		req.getRequestDispatcher("user-add.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/user-add.jsp").forward(req, resp);
 	}
 	
 	@Override
@@ -62,7 +62,7 @@ public class UserAddController extends HttpServlet {
 			req.setAttribute("message", "Thông tin không được để trống!");
             req.setAttribute("isDone", isDone);
             req.setAttribute("isSuccess", false);
-            req.getRequestDispatcher("user-add.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/views/user-add.jsp").forward(req, resp);
             return;
         }
 		
@@ -77,7 +77,7 @@ public class UserAddController extends HttpServlet {
 			}
 			req.setAttribute("isDone", isDone);
 			req.setAttribute("isSuccess", isSuccess);
-			req.getRequestDispatcher("user-add.jsp").forward(req, resp);			
+			req.getRequestDispatcher("/WEB-INF/views/user-add.jsp").forward(req, resp);			
 		} else if ( req.getServletPath().equals("/user-edit") ) {
 			int id = Integer.parseInt(req.getParameter("id"));
 			boolean isSuccess = userService.updateUser(id, fullName, email, password, roleId);
@@ -90,10 +90,12 @@ public class UserAddController extends HttpServlet {
 			req.setAttribute("user", user);
 			req.setAttribute("isDone", isDone);
 			req.setAttribute("isSuccess", isSuccess);
-			req.getRequestDispatcher("user-edit.jsp").forward(req, resp);
+			req.getRequestDispatcher("/WEB-INF/views/user-edit.jsp").forward(req, resp);
 		}
 		
 	}
 	
 }
+
+
 

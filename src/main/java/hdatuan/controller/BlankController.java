@@ -15,7 +15,9 @@ public class BlankController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		
-		req.getRequestDispatcher("blank.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/blank.jsp").forward(req, resp);
 	}
 }
+
+
 

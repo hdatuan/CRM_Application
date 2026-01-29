@@ -23,7 +23,9 @@ public class JobController extends HttpServlet {
 		
 		req.setAttribute("jobs", jobList);
 		
-		req.getRequestDispatcher("groupwork.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/groupwork.jsp").forward(req, resp);
 	}
 }
+
+
 

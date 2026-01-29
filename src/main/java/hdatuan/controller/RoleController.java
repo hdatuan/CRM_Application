@@ -37,8 +37,10 @@ public class RoleController extends HttpServlet {
 	        }
 	    }
 
-	    req.getRequestDispatcher("role-table.jsp").forward(req, resp);
+	    req.getRequestDispatcher("/WEB-INF/views/role-table.jsp").forward(req, resp);
 	}
 
 
 }
+
+

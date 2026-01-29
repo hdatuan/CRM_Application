@@ -41,10 +41,12 @@ public class UserController extends HttpServlet {
 		
 		req.setAttribute("users", userList);
 		
-		req.getRequestDispatcher("user-table.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/user-table.jsp").forward(req, resp);
 	}
 	
 	
 	
 }
+
+
 

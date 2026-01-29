@@ -24,7 +24,9 @@ public class TaskController extends HttpServlet {
 		
 		req.setAttribute("tasks", taskList);
 		
-		req.getRequestDispatcher("task.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/task.jsp").forward(req, resp);
 	}
 }
+
+
 

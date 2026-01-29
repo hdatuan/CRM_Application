@@ -51,7 +51,9 @@ public class ProfileController extends HttpServlet{
 	    req.setAttribute("notStartedPercent", notStartedPercent);
 	    req.setAttribute("inProgressPercent", inProgressPercent);
 	    req.setAttribute("donePercent", donePercent);
-		req.getRequestDispatcher("profile.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/profile.jsp").forward(req, resp);
 	}
 }
+
+
 
