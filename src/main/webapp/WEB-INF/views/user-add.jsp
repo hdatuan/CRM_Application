@@ -236,7 +236,7 @@
           <!-- /.row -->
         </div>
         <!-- /.container-fluid -->
-        <footer class="footer text-center"> {new Date().getFullYear()} &copy; myclass.com</footer>
+        <footer class="footer text-center"><script>document.write(new Date().getFullYear())</script> &copy; hdatuan</footer>
       </div>
       <!-- /#page-wrapper -->
     </div>

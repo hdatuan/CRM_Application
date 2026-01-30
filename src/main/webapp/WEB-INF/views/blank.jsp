@@ -138,7 +138,7 @@
 	                </div>
 	            </div>
 	            <!-- /.container-fluid -->
-	            <footer class="footer text-center"> 2018 &copy; myclass.com </footer>
+	            <footer class="footer text-center"><script>document.write(new Date().getFullYear())</script> &copy; hdatuan</footer>
 	        </div>
 	        <!-- /#page-wrapper -->
 	    </div>
