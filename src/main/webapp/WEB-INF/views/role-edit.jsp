@@ -187,6 +187,8 @@
     <!-- /#wrapper -->
     <!-- jQuery -->
     <script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Common Helper Functions -->
+    <script src="js/common.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- Menu Plugin JavaScript -->

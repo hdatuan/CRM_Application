@@ -14,14 +14,14 @@
 ---
 
 ## Table of Contents
-- [Overview](#-overview)
-- [Features](#-features)
-- [System Architecture](#%EF%B8%8F-system-architecture)
-- [Tech Stack](#%EF%B8%8F-tech-stack)
-- [Getting Started](#-getting-started)
-- [Project Structure](#-project-structure)
-- [Contributing](#-contributing)
-- [Authors](#%EF%B8%8F-authors)
+- [Overview](#overview)
+- [Features](#features)
+- [System Architecture](#system-architecture)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [Contributing](#contributing)
+- [Authors](#authors)
 
 ---
 
@@ -82,8 +82,8 @@ The project strictly follows the **Standard MVC (Model-View-Controller)** patter
 ### Installation
 1.  **Clone the repository**
     ```sh
-    git clone https://github.com/yourusername/crm-app.git
-    cd crm-app
+    git clone https://github.com/hdatuan/CRM_Application.git
+    cd CRM_Application
     ```
 
 2.  **Database Setup**
@@ -149,6 +149,5 @@ Contributions are what make the open source community such an amazing place to l
 ---
 
 ## Authors
-*   **MyClass** - *Frontend Design & Assets*
-*   **hdatuan** - *Backend Architecture & Development*
+**hdatuan** - *Backend Architecture & Development*
 

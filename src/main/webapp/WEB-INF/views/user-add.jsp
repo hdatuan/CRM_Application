@@ -180,7 +180,6 @@
                       <input
                       	name="password"
                         type="password"
-                        value="password"
                         class="form-control form-control-line"
                       />
                     </div>
@@ -221,7 +220,7 @@
 				</c:if>
                   <div class="form-group">
                     <div class="col-sm-12">
-                      <button type="submit" class="btn btn-success">
+                      <button id="submit-btn" type="submit" class="btn btn-success">
                         Thêm
                       </button>
                       <a href="user" class="btn btn-primary"
@@ -237,13 +236,15 @@
           <!-- /.row -->
         </div>
         <!-- /.container-fluid -->
-        <footer class="footer text-center">2018 &copy; myclass.com</footer>
+        <footer class="footer text-center"> {new Date().getFullYear()} &copy; myclass.com</footer>
       </div>
       <!-- /#page-wrapper -->
     </div>
     <!-- /#wrapper -->
     <!-- jQuery -->
     <script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Common Helper Functions -->
+    <script src="js/common.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- Menu Plugin JavaScript -->

@@ -201,7 +201,12 @@
                     <div class="col-sm-12">
                       <select name="role-id" class="form-control form-control-line">
                       	<c:forEach var = "item" items="${roles}">
-    		                    <option value="${item.id}" >${item.description}</option>
+    		                    <option value="${item.id}" 
+    		                    		<c:if test="${editUser != null && item.id == editUser.roleID}">
+    		                    			selected
+    		                    		</c:if>>
+    		                    ${item.description}
+    		                    </option>
 					     </c:forEach>
                       </select>
                     </div>
@@ -244,6 +249,8 @@
     <!-- /#wrapper -->
     <!-- jQuery -->
     <script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Common Helper Functions -->
+    <script src="js/common.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- Menu Plugin JavaScript -->
